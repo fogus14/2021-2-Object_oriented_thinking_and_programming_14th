@@ -1,0 +1,62 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: backend
+          uri: http://localhost:8080
+          predicates:
+            - Path=/cats/**, /pets/**, /dogs/**
+        - id: backend-subdomain
+          uri: http://localhost:8083
+          predicates:
+            - Path=/customers/**, /cartItems/**
+        - id: frontend-subdomain
+          uri: http://localhost:8082
+          predicates:
+            - Path=/shop/**, /shop/js/**
+        - id: frontend
+          uri: http://localhost:8081
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: BoundedContext383
+          uri: http://BoundedContext383:8080
+          predicates:
+            - Path= 
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080

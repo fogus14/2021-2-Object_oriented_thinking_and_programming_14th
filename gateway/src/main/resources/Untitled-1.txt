@@ -1,0 +1,3 @@
+http :8088/cats name="몽이" energy=1
+http :8088/customers id="fogus14@naver.com" address:='{"zipcode":"123", "detail":"..."}'
+http :8088/cartItems customer="http://localhost:8088/customers/fogus14@naver.com" pet="http://localhost:8088/cats/1"
